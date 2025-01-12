@@ -1,21 +1,21 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeManagement.Models
+namespace EmployeeManagementSystemModels
 {
     public class Employee
     {
-
         [Key]
         public int EmployeeId { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
-        [StringLength(50, MinimumLength =2, ErrorMessage = "First Name must be 2-50 characters.")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "First Name must be 2-50 characters.")]
         public string FirstName { get; set; }
 
         [Required]
@@ -31,6 +31,5 @@ namespace EmployeeManagement.Models
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public string PhotoPath { get; set; }
-
     }
 }
