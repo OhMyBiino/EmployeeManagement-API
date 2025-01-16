@@ -12,7 +12,6 @@ namespace EmployeeManagementSystemModels
         [Key]
         public int DepartmentId { get; set; }
 
-
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string DepartmentName { get; set; }

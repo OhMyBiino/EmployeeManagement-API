@@ -1,4 +1,6 @@
 using EmployeeManagementSystem.API.Database;
+using EmployeeManagementSystem.API.Models.DepartmentRepository;
+using EmployeeManagementSystem.API.Models.EmployeeRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("EmployeeManagementConnection"),
     new MySqlServerVersion(new Version(8,0,34)))
 );
+
+//Scope
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 var app = builder.Build();
 

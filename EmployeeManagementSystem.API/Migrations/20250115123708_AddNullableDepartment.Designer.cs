@@ -4,6 +4,7 @@ using EmployeeManagementSystem.API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagementSystem.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250115123708_AddNullableDepartment")]
+    partial class AddNullableDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +40,7 @@ namespace EmployeeManagementSystem.API.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
 
                     b.HasData(
                         new
@@ -101,7 +104,7 @@ namespace EmployeeManagementSystem.API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
