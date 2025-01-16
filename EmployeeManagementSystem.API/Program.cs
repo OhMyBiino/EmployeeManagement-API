@@ -18,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     new MySqlServerVersion(new Version(8,0,34)))
 );
 
-//Scope
+//life cycle
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 

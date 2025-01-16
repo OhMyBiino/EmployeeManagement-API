@@ -26,5 +26,48 @@ namespace EmployeeManagementSystem.API.Models.DepartmentRepository
 
             return department;
         }
+
+        public async Task<Department> GetDepartmentByName(string name) {
+
+            var department = await _context.Departments
+                    .FirstOrDefaultAsync(d => d.DepartmentName == name);
+
+            return department;
+        }
+
+        public async Task<Department> AddDepartmentAsync(Department department) 
+        {
+            var addedDepartment = await _context.Departments.AddAsync(department);
+
+            await _context.SaveChangesAsync();
+            return addedDepartment.Entity;
+        }
+
+        public async Task<Department> UpdateDepartmentAsync(Department department) 
+        {
+            var departmentToUpdate = await _context.Departments
+                .FirstOrDefaultAsync(d => d.DepartmentId == department.DepartmentId);
+
+            if (departmentToUpdate != null) 
+            {
+                departmentToUpdate.DepartmentName = department.DepartmentName;
+            }
+            
+            await _context.SaveChangesAsync();
+            return departmentToUpdate;
+        }
+
+        public async Task<Department> DeleteDepartmentAsync(int Id) 
+        {
+            var departmentToDelete = await _context.Departments.FindAsync(Id);
+
+            if (departmentToDelete != null) 
+            {
+                _context.Departments.Remove(departmentToDelete);
+                await _context.SaveChangesAsync();
+            }
+
+            return departmentToDelete;
+        }
     }
 }

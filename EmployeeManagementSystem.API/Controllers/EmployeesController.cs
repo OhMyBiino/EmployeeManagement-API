@@ -114,6 +114,8 @@ namespace EmployeeManagementSystem.API.Controllers
         {
             try
             {
+                //To-Do: make it shortcut, we don't need to also check here if the item to delete
+                //is existing, we already did that in the Repository Layer.
                 var employeeToDelete = await _employeeRepository.GetEmployeeByIdAsync(Id);
 
                 if (employeeToDelete == null)
@@ -121,7 +123,9 @@ namespace EmployeeManagementSystem.API.Controllers
                     return NotFound($"Employee with ID: {Id} is not found.");
                 }
 
-                return await _employeeRepository.DeleteEmployeeAsync(Id);
+                var deletedDepartment = await _employeeRepository.DeleteEmployeeAsync(Id);
+
+                return Ok(deletedDepartment);
                 //return NoContent();
             }
             catch (Exception) 
