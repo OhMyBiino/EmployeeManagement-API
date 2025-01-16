@@ -40,6 +40,26 @@ namespace EmployeeManagementSystem.API.Models.EmployeeRepository
             return employee;
         }
 
+        public async Task<IEnumerable<Employee>> Search(string name, Gender? gender) 
+        {
+            IQueryable<Employee> query = _context.Employees;
+
+            if (!String.IsNullOrEmpty(name)) 
+            {
+                query = query
+                    .Include(e => e.Dept)
+                    .Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name));
+            }
+
+            if (gender != null) 
+            {
+                query = query.Where(e => e.Gender == gender);
+            }
+
+            var resultQuery = query.ToList();
+            return resultQuery;
+        }
+
         public async Task<Employee> AddEmployeeAsync(Employee employee) 
         {
             var employeeToAdd = await _context.Employees.AddAsync(employee);

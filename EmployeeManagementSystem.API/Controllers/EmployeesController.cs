@@ -52,6 +52,27 @@ namespace EmployeeManagementSystem.API.Controllers
             }
         }
 
+        [HttpGet("{search}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> Search(string name, Gender? gender) 
+        {
+            try 
+            {
+                var resultQuery = await _employeeRepository.Search(name,gender);
+
+                if (resultQuery.Any()) 
+                {
+                    return Ok(resultQuery);
+                }
+
+                return NotFound();
+            }
+            catch (Exception) 
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error searching from the database.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {

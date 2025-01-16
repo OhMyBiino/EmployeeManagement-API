@@ -10,6 +10,8 @@ namespace EmployeeManagementSystem.API.Models.EmployeeRepository
 
         Task<Employee> GetEmployeeByEmailAsync(string email);
 
+        Task<IEnumerable<Employee>> Search(string name, Gender? gender);
+
         Task<Employee> AddEmployeeAsync(Employee employee);
         Task<Employee> UpdateEmployeeAsync(Employee employee);
 
